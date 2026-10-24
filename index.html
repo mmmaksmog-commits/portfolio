@@ -3,72 +3,132 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Портфолио разработчика</title>
-  <meta name="description" content="Портфолио frontend-разработчика: браузерная игра, трекер финансов, погодное приложение и дизайны сайтов.">
-  <meta name="theme-color" content="#0c0d12" media="(prefers-color-scheme: dark)">
-  <meta name="theme-color" content="#fafaf7" media="(prefers-color-scheme: light)">
-  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <title>Максим — сайты, которые приносят деньги</title>
+  <meta name="description" content="Разработка уникальных сайтов, веб-игр и приложений. Адаптивно под телефон и ПК. Портфолио: 15 проектов и 6 стилей дизайна.">
+  <meta name="theme-color" content="#0a0612">
+  <meta property="og:title" content="Максим — сайты, которые приносят деньги">
+  <meta property="og:description" content="Уникальные сайты, веб-игры и приложения под ключ.">
+  <meta property="og:image" content="img/photo.jpg">
+  <link rel="icon" href="img/avatar.jpg" type="image/jpeg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-  <script>try { const t = localStorage.getItem('portfolio_theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
 </head>
 <body>
-  <header class="nav">
-    <a class="nav__logo" href="#top" id="logo">—</a>
-    <nav class="nav__links" aria-label="Разделы">
-      <a href="#projects">Проекты</a>
-      <a href="#skills">Навыки</a>
+  <div class="glow" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <header class="nav" id="nav">
+    <a class="nav__brand" href="#top">
+      <img src="img/avatar.jpg" alt="" width="40" height="40">
+      <span id="brandName">Максим</span>
+    </a>
+    <nav class="nav__links" id="navLinks" aria-label="Разделы">
+      <a href="#games">Игры</a>
+      <a href="#trackers">Трекеры</a>
+      <a href="#apps">Приложения</a>
+      <a href="#designs">Дизайны</a>
       <a href="#contact">Контакты</a>
     </nav>
-    <button class="theme-btn" id="themeBtn" aria-label="Сменить тему">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z"/></svg>
-    </button>
+    <a class="btn btn--primary btn--sm nav__cta" href="#order">Заказать сайт</a>
+    <button class="nav__burger" id="burger" aria-label="Меню" aria-expanded="false" aria-controls="navLinks"><span></span><span></span></button>
   </header>
 
   <main id="top">
     <section class="hero">
-      <div class="hero__blob" aria-hidden="true"></div>
-      <p class="hero__hello reveal">Привет, я</p>
-      <h1 class="hero__name reveal" id="name">—</h1>
-      <p class="hero__role reveal" id="role"></p>
-      <p class="hero__intro reveal" id="intro"></p>
-      <div class="hero__cta reveal">
-        <a class="btn btn--primary" href="#projects">Смотреть проекты</a>
-        <a class="btn" href="#contact">Связаться</a>
+      <div class="hero__text">
+        <p class="hero__hello reveal">Привет, я <b id="name">Максим</b> 👋</p>
+        <h1 class="hero__title reveal" id="headline"></h1>
+        <p class="hero__intro reveal" id="intro"></p>
+        <div class="hero__cta reveal">
+          <a class="btn btn--primary" href="#order">Обсудить проект</a>
+          <a class="btn btn--wa" id="heroWa" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5 0-1.1.1-3.5-.9-2.9-1.2-4.8-4.2-4.9-4.4-.1-.2-1.2-1.6-1.2-3s.8-2.2 1-2.5c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.5c-.1.2-.3.3-.1.6.2.3.8 1.4 1.8 2.2 1.2 1.1 2.3 1.4 2.6 1.6.3.1.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.3.1.2.1.8-.1 1.5z"/></svg>
+            WhatsApp
+          </a>
+        </div>
+        <ul class="stats reveal" id="stats"></ul>
       </div>
-      <p class="hero__meta reveal" id="location"></p>
+      <figure class="hero__photo reveal">
+        <img src="img/photo.jpg" alt="Максим за рулём ночью" width="900" height="1178">
+        <figcaption><span class="dot"></span>Принимаю заказы</figcaption>
+      </figure>
     </section>
 
-    <section class="section" id="projects">
+    <div id="sections"></div>
+
+    <section class="section" id="designs">
       <div class="section__head reveal">
-        <span class="section__num">01</span>
-        <h2 class="section__title">Проекты</h2>
+        <h2 class="section__title">Дизайны сайтов</h2>
+        <p class="section__lead">Какой стиль подойдёт вашему бизнесу?</p>
       </div>
-      <div class="projects" id="projectList"></div>
+      <a class="designs-card reveal" id="designsCard">
+        <div class="designs-card__art" aria-hidden="true">
+          <i style="--c1:#f4f3ef;--c2:#111"></i><i style="--c1:#ffe500;--c2:#ff3d7f"></i><i style="--c1:#7c5cff;--c2:#22d3ee"></i>
+          <i style="--c1:#0d0c0a;--c2:#c9a96a"></i><i style="--c1:#ff2bd6;--c2:#00f0ff"></i><i style="--c1:#3f5d3a;--c2:#d0794b"></i>
+        </div>
+        <div class="designs-card__body">
+          <h3 id="designsTitle"></h3>
+          <p id="designsDesc"></p>
+          <span class="btn btn--primary btn--sm">Смотреть галерею ↗</span>
+        </div>
+      </a>
     </section>
 
     <section class="section" id="skills">
       <div class="section__head reveal">
-        <span class="section__num">02</span>
         <h2 class="section__title">Навыки</h2>
       </div>
-      <div class="skills" id="skillList"></div>
+      <div class="skills reveal">
+        <div class="skill"><h3>Языки</h3><ul class="chips" id="langs"></ul></div>
+        <div class="skill"><h3>Инструменты</h3><ul class="chips" id="tools"></ul></div>
+      </div>
     </section>
 
-    <section class="section contact" id="contact">
+    <section class="section" id="contact">
       <div class="section__head reveal">
-        <span class="section__num">03</span>
         <h2 class="section__title">Контакты</h2>
+        <p class="section__lead">Напишите или позвоните — обсудим ваш сайт.</p>
       </div>
-      <p class="contact__lead reveal">Рассматриваю стажировки, работу и интересные проекты. Напишите — отвечу быстро.</p>
-      <div class="contact__links reveal" id="contactLinks"></div>
+      <div class="contacts reveal" id="contacts"></div>
+    </section>
+
+    <section class="section" id="order">
+      <div class="order reveal">
+        <div class="order__text">
+          <h2 class="section__title">Оставить заявку</h2>
+          <p>Расскажите, какой сайт вам нужен. Отвечу в течение дня и предложу идеи.</p>
+          <ul class="order__perks">
+            <li>Уникальный дизайн, не шаблон</li>
+            <li>Адаптивность под телефон и ПК</li>
+            <li>Публикация в интернете</li>
+          </ul>
+        </div>
+        <form class="form" id="orderForm" novalidate>
+          <label class="field"><span>Ваше имя</span><input name="name" required maxlength="60" autocomplete="name" placeholder="Как к вам обращаться"></label>
+          <label class="field"><span>Телефон или мессенджер</span><input name="contact" required maxlength="80" autocomplete="tel" inputmode="tel" placeholder="+7 900 000-00-00"></label>
+          <label class="field"><span>Что нужно сделать</span>
+            <select name="type">
+              <option>Лендинг</option>
+              <option>Интернет-магазин</option>
+              <option>Сайт компании</option>
+              <option>Веб-игра</option>
+              <option>Веб-приложение</option>
+              <option>Другое</option>
+            </select>
+          </label>
+          <label class="field"><span>Описание задачи</span><textarea name="message" rows="4" maxlength="2000" placeholder="Пара слов о проекте, сроках и бюджете"></textarea></label>
+          <input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <button class="btn btn--primary btn--block" type="submit">Отправить заявку</button>
+          <p class="form__status" id="formStatus" role="status"></p>
+        </form>
+      </div>
     </section>
   </main>
 
   <footer class="footer">
-    <span id="footerName"></span> · <span id="year"></span> · Сделано без фреймворков
+    <span>© <span id="year"></span> Максим · Сайты, которые приносят деньги</span>
+    <a id="footerGh" target="_blank" rel="noopener">GitHub</a>
   </footer>
 
   <script type="module" src="js/main.js"></script>

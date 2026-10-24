@@ -1,122 +1,141 @@
-import { profile, skills, projects } from './config.js';
+import { profile, stats, skills, sections, designs } from './config.js';
 
 const $ = (s) => document.querySelector(s);
-const repoUrl = (id) => `https://github.com/${profile.github}/${id}`;
-const hasGithub = profile.github && profile.github !== 'YOUR_GITHUB';
+const waUrl = (text = '') => `https://wa.me/${profile.whatsapp}${text ? `?text=${encodeURIComponent(text)}` : ''}`;
+const isExternal = (url) => /^https?:/.test(url);
+const extAttrs = (url) => (isExternal(url) ? ' target="_blank" rel="noopener"' : '');
 
-// Мини-превью проектов, нарисованные на CSS — без скриншотов.
-const PREVIEWS = {
-  'last-signal': `
-    <div class="pv pv--signal">
-      <span class="pv-signal__alert">[ ТРЕВОГА: O₂ — КРИТИЧЕСКИЙ ]</span>
-      <span>Ты просыпаешься в криокапсуле…</span>
-      <span class="pv-signal__echo">ЭХО › Доброе утро, инженер.</span>
-      <span class="pv-signal__choice">1 Дёрнуть аварийный рычаг</span>
-      <span class="pv-signal__choice">2 Ждать, пока ИИ откроет капсулу</span>
-      <span class="pv-signal__cursor">&gt; _</span>
-    </div>`,
-  'finance-tracker': `
-    <div class="pv pv--fin">
-      <div class="pv-fin__card"><small>Баланс</small><b>50 236 ₽</b></div>
-      <div class="pv-fin__bars">${[38, 62, 45, 80, 55, 70].map((h, i) => `<i style="height:${h}%;animation-delay:${i * 0.08}s"></i>`).join('')}</div>
-    </div>`,
-  'weather-app': `
-    <div class="pv pv--sky">
-      <span class="pv-sky__icon">⛅</span>
-      <b class="pv-sky__temp">18°</b>
-      <span class="pv-sky__city">Москва · Переменная облачность</span>
-    </div>`,
-};
-
-// ---------- Профиль ----------
-document.title = `${profile.name} — ${profile.role}`;
-$('#logo').textContent = profile.name.split(' ').map((w) => w[0]).join('');
+// ---------- Hero ----------
+$('#brandName').textContent = profile.name;
 $('#name').textContent = profile.name;
-$('#role').textContent = profile.role;
+$('#headline').textContent = profile.headline;
 $('#intro').textContent = profile.intro;
-$('#location').textContent = profile.location;
-$('#footerName').textContent = profile.name;
+$('#heroWa').href = waUrl('Здравствуйте! Хочу обсудить сайт.');
+$('#stats').innerHTML = stats.map((s) => `<li><b>${s.value}</b><span>${s.label}</span></li>`).join('');
 $('#year').textContent = new Date().getFullYear();
+$('#footerGh').href = `https://github.com/${profile.github}`;
 
-// ---------- Проекты ----------
-const projectCard = (p) => `
-  <article class="project ${p.featured ? 'project--featured' : ''} reveal">
-    <a class="project__preview" href="${p.live}" aria-label="Открыть ${p.title}">${PREVIEWS[p.id] ?? ''}</a>
-    <div class="project__body">
-      ${p.featured ? '<span class="badge">Главный проект</span>' : ''}
-      <h3 class="project__title">${p.title}</h3>
-      <p class="project__tagline">${p.tagline}</p>
-      <p class="project__desc">${p.description}</p>
-      <ul class="tags">${p.tags.map((t) => `<li>${t}</li>`).join('')}</ul>
-      <div class="project__links">
-        <a class="btn btn--primary btn--sm" href="${p.live}">Открыть ↗</a>
-        ${hasGithub ? `<a class="btn btn--sm" href="${repoUrl(p.id)}" target="_blank" rel="noopener">Код на GitHub</a>` : ''}
-      </div>
-    </div>
-  </article>`;
-
-const designsCard = () => {
-  const ready = Boolean(profile.designsUrl);
-  const ext = /^https?:/.test(profile.designsUrl) ? ' target="_blank" rel="noopener"' : '';
-  return `
-  <article class="project project--designs reveal">
-    <a class="project__preview" ${ready ? `href="${profile.designsUrl}"${ext}` : ''} aria-label="Галерея дизайнов">
-      <div class="pv pv--designs">
-        <i class="d1"></i><i class="d2"></i><i class="d3"></i><i class="d4"></i>
-      </div>
+// ---------- Разделы проектов ----------
+const card = (p, i) => `
+  <article class="card reveal" style="--c:${p.color};--d:${i * 60}ms">
+    <a class="card__cover" href="${p.live}"${extAttrs(p.live)} aria-label="Открыть «${p.title}»">
+      <span class="card__icon" aria-hidden="true">${p.icon}</span>
+      <span class="card__num">0${i + 1}</span>
     </a>
-    <div class="project__body">
-      <h3 class="project__title">Галерея дизайнов</h3>
-      <p class="project__tagline">Разные стили сайтов, которые я могу сделать</p>
-      <p class="project__desc">Шесть живых сайтов: минимализм, необрутализм, glassmorphism, люкс, киберпанк и эко. Каждый можно открыть на телефоне и ПК — и заказать похожий.</p>
-      <div class="project__links">
-        ${ready
-          ? `<a class="btn btn--primary btn--sm" href="${profile.designsUrl}"${ext}>Смотреть дизайны ↗</a>`
-          : '<span class="btn btn--sm is-disabled">Скоро</span>'}
-        ${hasGithub && !ext ? `<a class="btn btn--sm" href="${repoUrl('designs')}" target="_blank" rel="noopener">Код на GitHub</a>` : ''}
+    <div class="card__body">
+      <span class="card__tagline">${p.tagline}</span>
+      <h3 class="card__title">${p.title}</h3>
+      <p class="card__desc">${p.desc}</p>
+      <ul class="tags">${p.tags.map((t) => `<li>${t}</li>`).join('')}</ul>
+      <div class="card__actions">
+        <a class="btn btn--primary btn--sm" href="${p.live}"${extAttrs(p.live)}>Открыть ↗</a>
+        ${p.repo ? `<a class="btn btn--ghost btn--sm" href="${p.repo}" target="_blank" rel="noopener">Код</a>` : ''}
       </div>
     </div>
   </article>`;
-};
 
-$('#projectList').innerHTML = projects.map(projectCard).join('') + designsCard();
+$('#sections').innerHTML = sections.map((s) => `
+  <section class="section" id="${s.id}">
+    <div class="section__head reveal">
+      <h2 class="section__title">${s.title} <span class="section__count">${s.items.length}</span></h2>
+      <p class="section__lead">${s.lead}</p>
+    </div>
+    <div class="cards">${s.items.map(card).join('')}</div>
+  </section>`).join('');
+
+// ---------- Дизайны ----------
+$('#designsCard').href = designs.live;
+$('#designsTitle').textContent = designs.title;
+$('#designsDesc').textContent = designs.desc;
 
 // ---------- Навыки ----------
-$('#skillList').innerHTML = skills.map((s) => `
-  <div class="skill reveal">
-    <h3 class="skill__group">${s.group}</h3>
-    <ul class="tags tags--lg">${s.items.map((i) => `<li>${i}</li>`).join('')}</ul>
-  </div>`).join('');
+$('#langs').innerHTML = skills.languages.map((l) => `<li>${l}</li>`).join('');
+$('#tools').innerHTML = skills.tools.map((t) => `<li>${t}</li>`).join('');
 
 // ---------- Контакты ----------
 const contacts = [
-  hasGithub && { label: 'GitHub', value: `@${profile.github}`, href: `https://github.com/${profile.github}` },
-  profile.telegram && { label: 'Telegram', value: `@${profile.telegram}`, href: `https://t.me/${profile.telegram}` },
-  profile.email && { label: 'Почта', value: profile.email, href: `mailto:${profile.email}` },
-].filter(Boolean);
-$('#contactLinks').innerHTML = contacts.length
-  ? contacts.map((c) => `
-    <a class="contact-link" href="${c.href}" ${c.href.startsWith('http') ? 'target="_blank" rel="noopener"' : ''}>
-      <span class="contact-link__label">${c.label}</span>
-      <span class="contact-link__value">${c.value}</span>
-      <span class="contact-link__arrow" aria-hidden="true">↗</span>
-    </a>`).join('')
-  : '<p class="muted">Контакты скоро появятся.</p>';
+  { cls: 'wa', label: 'WhatsApp', value: profile.whatsappLabel, href: waUrl('Здравствуйте! Хочу обсудить сайт.'), icon: '💬', hint: 'Написать' },
+  { cls: 'tel', label: 'Телефон', value: profile.phoneLabel, href: `tel:${profile.phone}`, icon: '📞', hint: 'Позвонить' },
+  { cls: 'gh', label: 'GitHub', value: `@${profile.github}`, href: `https://github.com/${profile.github}`, icon: '💻', hint: 'Код проектов' },
+];
+$('#contacts').innerHTML = contacts.map((c) => `
+  <a class="contact contact--${c.cls}" href="${c.href}"${extAttrs(c.href)}>
+    <span class="contact__icon" aria-hidden="true">${c.icon}</span>
+    <span class="contact__text"><small>${c.label}</small><b>${c.value}</b></span>
+    <span class="contact__hint">${c.hint} →</span>
+  </a>`).join('');
 
-// ---------- Тема ----------
-const THEME_KEY = 'portfolio_theme';
-const root = document.documentElement;
-try { const t = localStorage.getItem(THEME_KEY); if (t) root.dataset.theme = t; } catch { /* ignore */ }
-$('#themeBtn').addEventListener('click', () => {
-  const current = root.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-  root.dataset.theme = current === 'dark' ? 'light' : 'dark';
-  try { localStorage.setItem(THEME_KEY, root.dataset.theme); } catch { /* ignore */ }
+// ---------- Форма заявки (FormSubmit: письмо приходит на почту без своего сервера) ----------
+const form = $('#orderForm');
+const status = $('#formStatus');
+
+function setStatus(text, type = '') {
+  status.textContent = text;
+  status.className = `form__status ${type}`;
+}
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const data = Object.fromEntries(new FormData(form));
+  if (data._honey) return; // бот
+  if (!data.name.trim() || !data.contact.trim()) {
+    setStatus('Заполните имя и контакт для связи', 'is-error');
+    form.querySelector(data.name.trim() ? '[name=contact]' : '[name=name]').focus();
+    return;
+  }
+  const btn = form.querySelector('button[type=submit]');
+  btn.disabled = true;
+  setStatus('Отправляю…');
+  try {
+    const res = await fetch(`https://formsubmit.co/ajax/${profile.formEmail}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({
+        Имя: data.name,
+        Контакт: data.contact,
+        Тип: data.type,
+        Описание: data.message || '—',
+        _subject: `Новая заявка с сайта: ${data.type}`,
+        _template: 'table',
+      }),
+    });
+    const json = await res.json().catch(() => ({}));
+    if (!res.ok || String(json.success) !== 'true') throw new Error(json.message || 'send failed');
+    form.reset();
+    setStatus('Спасибо! Заявка отправлена — скоро свяжусь с вами.', 'is-ok');
+  } catch {
+    const text = `Здравствуйте! Меня зовут ${data.name}. Нужен сайт: ${data.type}. ${data.message || ''} Контакт: ${data.contact}`;
+    status.className = 'form__status is-error';
+    status.innerHTML = `Не удалось отправить. <a href="${waUrl(text)}" target="_blank" rel="noopener">Отправить через WhatsApp</a>`;
+  } finally {
+    btn.disabled = false;
+  }
 });
+
+// ---------- Мобильное меню ----------
+const burger = $('#burger');
+burger.addEventListener('click', () => {
+  const open = document.body.classList.toggle('menu-open');
+  burger.setAttribute('aria-expanded', open);
+});
+$('#navLinks').addEventListener('click', (e) => {
+  if (e.target.closest('a')) { document.body.classList.remove('menu-open'); burger.setAttribute('aria-expanded', 'false'); }
+});
+
+// ---------- Активный раздел в меню ----------
+const links = [...document.querySelectorAll('.nav__links a')];
+const spy = new IntersectionObserver((entries) => {
+  for (const e of entries) {
+    if (!e.isIntersecting) continue;
+    links.forEach((a) => a.classList.toggle('is-active', a.getAttribute('href') === `#${e.target.id}`));
+  }
+}, { rootMargin: '-45% 0px -50% 0px' });
+document.querySelectorAll('main section[id]').forEach((s) => spy.observe(s));
 
 // ---------- Появление при прокрутке ----------
 const io = new IntersectionObserver((entries) => {
   for (const e of entries) {
     if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
   }
-}, { threshold: 0.12 });
+}, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
