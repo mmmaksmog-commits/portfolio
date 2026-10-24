@@ -9,7 +9,7 @@ export const profile = {
   whatsappLabel: '8 993 304-21-96',
   phone: '+79283042196',        // для звонка tel:
   phoneLabel: '8 928 304-21-96',
-  formEmail: 'mmmaksmog@gmail.com', // куда приходят заявки с формы (через FormSubmit)
+  formEmail: 'mysikkk@gmail.com', // куда приходят заявки с формы (через FormSubmit)
 };
 
 export const stats = [
