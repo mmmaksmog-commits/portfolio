@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Портфолио разработчика</title>
+  <meta name="description" content="Портфолио frontend-разработчика: браузерная игра, трекер финансов, погодное приложение и дизайны сайтов.">
+  <meta name="theme-color" content="#0c0d12" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#fafaf7" media="(prefers-color-scheme: light)">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script>try { const t = localStorage.getItem('portfolio_theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
+</head>
+<body>
+  <header class="nav">
+    <a class="nav__logo" href="#top" id="logo">—</a>
+    <nav class="nav__links" aria-label="Разделы">
+      <a href="#projects">Проекты</a>
+      <a href="#skills">Навыки</a>
+      <a href="#contact">Контакты</a>
+    </nav>
+    <button class="theme-btn" id="themeBtn" aria-label="Сменить тему">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z"/></svg>
+    </button>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero__blob" aria-hidden="true"></div>
+      <p class="hero__hello reveal">Привет, я</p>
+      <h1 class="hero__name reveal" id="name">—</h1>
+      <p class="hero__role reveal" id="role"></p>
+      <p class="hero__intro reveal" id="intro"></p>
+      <div class="hero__cta reveal">
+        <a class="btn btn--primary" href="#projects">Смотреть проекты</a>
+        <a class="btn" href="#contact">Связаться</a>
+      </div>
+      <p class="hero__meta reveal" id="location"></p>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="section__head reveal">
+        <span class="section__num">01</span>
+        <h2 class="section__title">Проекты</h2>
+      </div>
+      <div class="projects" id="projectList"></div>
+    </section>
+
+    <section class="section" id="skills">
+      <div class="section__head reveal">
+        <span class="section__num">02</span>
+        <h2 class="section__title">Навыки</h2>
+      </div>
+      <div class="skills" id="skillList"></div>
+    </section>
+
+    <section class="section contact" id="contact">
+      <div class="section__head reveal">
+        <span class="section__num">03</span>
+        <h2 class="section__title">Контакты</h2>
+      </div>
+      <p class="contact__lead reveal">Рассматриваю стажировки, работу и интересные проекты. Напишите — отвечу быстро.</p>
+      <div class="contact__links reveal" id="contactLinks"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span id="footerName"></span> · <span id="year"></span> · Сделано без фреймворков
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
