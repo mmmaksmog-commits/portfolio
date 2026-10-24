@@ -2,7 +2,7 @@
 
 Сайт-портфолио: 15 проектов в трёх разделах, галерея дизайнов, контакты и форма заявок.
 
-### ▶️ [mmmaksmog-commits.github.io](https://mmmaksmog-commits.github.io/)
+### ▶️ [mysik-portfolio.vercel.app](https://mysik-portfolio.vercel.app/)
 
 ## Разделы
 
