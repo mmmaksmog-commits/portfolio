@@ -57,9 +57,10 @@ const projectCard = (p) => `
 
 const designsCard = () => {
   const ready = Boolean(profile.designsUrl);
+  const ext = /^https?:/.test(profile.designsUrl) ? ' target="_blank" rel="noopener"' : '';
   return `
   <article class="project project--designs reveal">
-    <a class="project__preview" ${ready ? `href="${profile.designsUrl}" target="_blank" rel="noopener"` : ''} aria-label="Галерея дизайнов">
+    <a class="project__preview" ${ready ? `href="${profile.designsUrl}"${ext}` : ''} aria-label="Галерея дизайнов">
       <div class="pv pv--designs">
         <i class="d1"></i><i class="d2"></i><i class="d3"></i><i class="d4"></i>
       </div>
@@ -67,11 +68,12 @@ const designsCard = () => {
     <div class="project__body">
       <h3 class="project__title">Галерея дизайнов</h3>
       <p class="project__tagline">Разные стили сайтов, которые я могу сделать</p>
-      <p class="project__desc">Лендинги, магазины, портфолио и корпоративные сайты — в минимализме, брутализме, glassmorphism и других стилях. Можно выбрать стиль и заказать похожий.</p>
+      <p class="project__desc">Шесть живых сайтов: минимализм, необрутализм, glassmorphism, люкс, киберпанк и эко. Каждый можно открыть на телефоне и ПК — и заказать похожий.</p>
       <div class="project__links">
         ${ready
-          ? `<a class="btn btn--primary btn--sm" href="${profile.designsUrl}" target="_blank" rel="noopener">Смотреть дизайны ↗</a>`
+          ? `<a class="btn btn--primary btn--sm" href="${profile.designsUrl}"${ext}>Смотреть дизайны ↗</a>`
           : '<span class="btn btn--sm is-disabled">Скоро</span>'}
+        ${hasGithub && !ext ? `<a class="btn btn--sm" href="${repoUrl('designs')}" target="_blank" rel="noopener">Код на GitHub</a>` : ''}
       </div>
     </div>
   </article>`;

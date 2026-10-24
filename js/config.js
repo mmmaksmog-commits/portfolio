@@ -8,7 +8,7 @@ export const profile = {
   github: 'YOUR_GITHUB',          // ник на GitHub
   telegram: '',                   // ник в Telegram без @
   email: '',                      // почта для связи
-  designsUrl: '',                 // ссылка на сайт с дизайнами
+  designsUrl: '/designs/',        // галерея дизайнов (проект designs)
 };
 
 export const skills = [

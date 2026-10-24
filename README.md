@@ -11,6 +11,7 @@
 | [🛰️ Последний сигнал](https://github.com/YOUR_GITHUB/last-signal) | Текстовый sci-fi хоррор в браузере, 5 концовок |
 | [💸 Финтрек](https://github.com/YOUR_GITHUB/finance-tracker) | Трекер финансов с графиками и офлайн-режимом |
 | [⛅ Небо](https://github.com/YOUR_GITHUB/weather-app) | Погода с поиском, геолокацией и живым фоном |
+| [🎨 Галерея дизайнов](https://github.com/YOUR_GITHUB/designs) | 6 сайтов в разных стилях с живыми превью |
 
 ## Особенности
 
