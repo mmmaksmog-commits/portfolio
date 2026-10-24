@@ -58,7 +58,7 @@ export const sections = [
     lead: 'Небольшие сервисы, которые решают одну задачу — быстро и красиво.',
     items: [
       { icon: '⛅', color: '#3b82f6', title: 'Небо', tagline: 'Погода', desc: 'Поиск городов, геолокация, прогноз по часам и на неделю, живой фон под погоду.', tags: ['REST API', 'Fetch'], ...own('weather-app') },
-      { icon: '🎬', color: '#e11d48', title: 'Что посмотреть', tagline: 'Выбор фильма', desc: 'Популярное, топ-250 и премьеры Кинопоиска, подбор по настроению, рулетка и список «посмотреть позже».', tags: ['API Кинопоиска', 'Serverless'], ...own('movie-picker') },
+      { icon: '🎬', color: '#e11d48', title: 'Что посмотреть', tagline: 'Выбор фильма', desc: 'Новинки и популярное обновляются сами каждую ночь: постеры, описания, поиск по всей базе, рулетка и список «посмотреть позже».', tags: ['Serverless', 'SPARQL'], ...own('movie-picker') },
       { icon: '💱', color: '#14b8a6', title: 'Курс', tagline: 'Конвертер валют', desc: 'Актуальные курсы 30+ валют, быстрый обмен направления и избранные пары.', tags: ['REST API', 'Intl'], ...own('currency-converter') },
       { icon: '🔐', color: '#8b5cf6', title: 'Пароль', tagline: 'Генератор паролей', desc: 'Надёжные пароли и фразы, оценка стойкости и время на взлом.', tags: ['Web Crypto', 'Безопасность'], ...own('password-generator') },
       { icon: '🔳', color: '#64748b', title: 'QR', tagline: 'Генератор QR-кодов', desc: 'QR для ссылки, Wi-Fi или контакта. Свои цвета и скачивание PNG.', tags: ['Canvas', 'JavaScript'], ...own('qr-generator') },
