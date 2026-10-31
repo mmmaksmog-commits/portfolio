@@ -16,32 +16,67 @@ $('#year').textContent = new Date().getFullYear();
 $('#footerGh').href = `https://github.com/${profile.github}`;
 
 // ---------- Разделы проектов ----------
+// Каждый раздел свёрнут: видна полоска иконок и кнопка «Показать». Карточки раскрываются по нажатию.
 const card = (p, i) => `
-  <article class="card reveal" style="--c:${p.color};--d:${i * 60}ms">
+  <article class="card" style="--c:${p.color};--d:${i * 40}ms">
     <a class="card__cover" href="${p.live}"${extAttrs(p.live)} aria-label="Открыть «${p.title}»">
       <span class="card__icon" aria-hidden="true">${p.icon}</span>
-      <span class="card__num">0${i + 1}</span>
+      <span class="card__num">${String(i + 1).padStart(2, '0')}</span>
     </a>
     <div class="card__body">
       <span class="card__tagline">${p.tagline}</span>
       <h3 class="card__title">${p.title}</h3>
       <p class="card__desc">${p.desc}</p>
       <ul class="tags">${p.tags.map((t) => `<li>${t}</li>`).join('')}</ul>
-      <div class="card__actions">
-        <a class="btn btn--primary btn--sm" href="${p.live}"${extAttrs(p.live)}>Открыть ↗</a>
-        ${p.repo ? `<a class="btn btn--ghost btn--sm" href="${p.repo}" target="_blank" rel="noopener">Код</a>` : ''}
-      </div>
+      <div class="card__actions"><a class="btn btn--primary btn--sm" href="${p.live}"${extAttrs(p.live)}>Открыть ↗</a></div>
     </div>
   </article>`;
 
 $('#sections').innerHTML = sections.map((s) => `
-  <section class="section" id="${s.id}">
-    <div class="section__head reveal">
-      <h2 class="section__title">${s.title} <span class="section__count">${s.items.length}</span></h2>
-      <p class="section__lead">${s.lead}</p>
+  <section class="section section--fold" id="${s.id}" data-open="false">
+    <div class="fold reveal">
+      <button class="fold__head" aria-expanded="false" aria-controls="${s.id}-cards">
+        <span class="fold__text">
+          <span class="fold__title">${s.title} <span class="section__count">${s.items.length}</span></span>
+          <span class="fold__lead">${s.lead}</span>
+        </span>
+        <span class="fold__icons" aria-hidden="true">${s.items.slice(0, 6).map((p) => `<i style="--c:${p.color}">${p.icon}</i>`).join('')}${s.items.length > 6 ? `<i class="more">+${s.items.length - 6}</i>` : ''}</span>
+        <span class="fold__btn"><span class="fold__label">Показать</span> <b>▾</b></span>
+      </button>
+      <div class="fold__body" id="${s.id}-cards"><div class="fold__inner">
+        <div class="cards">${s.items.map(card).join('')}</div>
+        ${s.all ? `<a class="btn btn--ghost fold__all" href="${s.all.href}">${s.all.label} →</a>` : ''}
+      </div></div>
     </div>
-    <div class="cards">${s.items.map(card).join('')}</div>
   </section>`).join('');
+
+function setOpen(section, open) {
+  section.dataset.open = open;
+  const head = section.querySelector('.fold__head');
+  head.setAttribute('aria-expanded', open);
+  section.querySelector('.fold__label').textContent = open ? 'Свернуть' : 'Показать';
+}
+document.querySelectorAll('.section--fold').forEach((sec) => {
+  sec.querySelector('.fold__head').addEventListener('click', () => {
+    const open = sec.dataset.open !== 'true';
+    setOpen(sec, open);
+    if (!open) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+// Переход из меню (или по ссылке #games) сразу раскрывает раздел
+function openFromHash() {
+  if (!/^#[\w-]+$/.test(location.hash)) return;
+  const sec = document.querySelector(`.section--fold${location.hash}`);
+  if (sec) setOpen(sec, true);
+}
+window.addEventListener('hashchange', openFromHash);
+document.querySelectorAll('a[href^="#"]').forEach((a) => a.addEventListener('click', () => {
+  const href = a.getAttribute('href');
+  if (!/^#[\w-]+$/.test(href)) return;
+  const sec = document.querySelector(`.section--fold${href}`);
+  if (sec) setOpen(sec, true);
+}));
+openFromHash();
 
 // ---------- Дизайны ----------
 $('#designsCard').href = designs.live;
