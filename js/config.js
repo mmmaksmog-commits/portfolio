@@ -13,8 +13,8 @@ export const profile = {
 };
 
 export const stats = [
-  { value: '15', label: 'проектов в портфолио' },
-  { value: '6', label: 'стилей дизайна' },
+  { value: '30', label: 'приложений и игр' },
+  { value: '12', label: 'демо-сайтов для бизнеса' },
   { value: '100%', label: 'адаптивность' },
 ];
 
@@ -23,9 +23,8 @@ export const skills = {
   tools: ['Git и GitHub', 'Vite', 'Figma'],
 };
 
-const gh = (repo) => `https://github.com/${profile.github}/${repo}`;
-// Наши проекты лежат на <ник>.github.io/<repo>/, поэтому ссылки — от корня сайта.
-const own = (repo) => ({ live: `/${repo}/`, repo: gh(repo) });
+// Все проекты живут на одном сайте: /<папка>/
+const own = (dir) => ({ live: `/${dir}/` });
 
 export const sections = [
   {
@@ -34,8 +33,13 @@ export const sections = [
     lead: 'Браузерные игры, в которые можно играть с телефона и ПК, без установки.',
     items: [
       { icon: '🛰️', color: '#22c55e', title: 'Последний сигнал', tagline: 'Sci-fi хоррор-квест', desc: 'Заброшенная станция, подозрительный ИИ, кислород как таймер, взлом кодов и 5 концовок.', tags: ['JavaScript', 'Web Audio'], ...own('last-signal') },
+      { icon: '🚀', color: '#8b5cf6', title: 'Стартап', tagline: 'Игра решений', desc: 'Свайпайте решения основателя и держите баланс денег, команды, клиентов и инвесторов. 8 концовок.', tags: ['Свайпы', 'Баланс'], ...own('startup-swipe') },
+      { icon: '🕵️', color: '#a3261f', title: 'Детектив', tagline: 'Дело каждый раз новое', desc: 'Генерируемое расследование: осмотрите место преступления, допросите подозреваемых и найдите убийцу за 6 действий.', tags: ['Процедурная генерация', 'Логика'], ...own('detective') },
+      { icon: '💎', color: '#fbbf24', title: 'Ограбление', tagline: 'Пошаговый стелс', desc: 'Проведите вора мимо охранников с зонами обзора. 6 уровней, проверенных решателем, звёзды за минимум ходов.', tags: ['Головоломка', 'Алгоритмы'], ...own('heist') },
+      { icon: '✏️', color: '#ff6b4a', title: 'Нарисуй путь', tagline: 'Физическая головоломка', desc: 'Рисуйте линии пальцем — шарик покатится по ним с настоящей физикой. Доведите его до чаши.', tags: ['Canvas', 'Физика'], ...own('draw-path') },
+      { icon: '🍸', color: '#ff4fd8', title: 'Космический бар', tagline: 'Игра на скорость', desc: 'Смешивайте коктейли для инопланетян по рецептам, пока у них не кончилось терпение.', tags: ['Time management', 'Анимации'], ...own('space-bar') },
       { icon: '⛏️', color: '#f59e0b', title: 'Осколки Первого мира', tagline: '2D-песочница', desc: 'Пиксельный мир с крафтом, жителями, подземельями и боссами. Сохранения в браузере.', tags: ['TypeScript', 'Phaser', 'React'], ...own('shards-of-first-world') },
-      { icon: '🦠', color: '#19ffd2', title: 'Agar.io by mysik', tagline: 'Аркада в стиле Agar.io', desc: 'Поглощай клетки, собирай бонусы и комбо, выживай против умных AI и включай режим мутации.', tags: ['Canvas', 'AI', 'Web Audio'], live: 'https://mmmaksmog-commits.github.io/Agar-Io-by-mystic/', repo: gh('Agar-Io-by-mystic') },
+      { icon: '🦠', color: '#19ffd2', title: 'Agar.io by mysik', tagline: 'Аркада в стиле Agar.io', desc: 'Поглощай клетки, собирай бонусы и комбо, выживай против умных AI и включай режим мутации.', tags: ['Canvas', 'AI', 'Web Audio'], live: 'https://mmmaksmog-commits.github.io/Agar-Io-by-mystic/' },
       { icon: '🔤', color: '#a855f7', title: '5 букв', tagline: 'Словесная головоломка', desc: 'Угадай слово из пяти букв за шесть попыток. Слово дня, свободный режим и статистика.', tags: ['JavaScript', 'Логика'], ...own('five-letters') },
       { icon: '🏃', color: '#ec4899', title: 'Неон-ран', tagline: 'Бесконечный раннер', desc: 'Прыгай через препятствия в неоновом городе. Скорость растёт, рекорд сохраняется.', tags: ['Canvas', 'Физика'], ...own('neon-run') },
     ],
@@ -45,8 +49,13 @@ export const sections = [
     title: 'Трекеры',
     lead: 'Приложения, которые помогают следить за деньгами, привычками и собой. Данные хранятся на устройстве.',
     items: [
+      { icon: '⏳', color: '#e4572e', title: 'Жизнь в неделях', tagline: 'Вся жизнь на одном экране', desc: 'Около 4000 клеток-недель: сколько прожито, сколько впереди, и важные события на карте жизни.', tags: ['Визуализация', 'Даты'], ...own('life-weeks') },
+      { icon: '☕', color: '#c8864a', title: 'Кофеин', tagline: 'Когда получится уснуть', desc: 'Сколько кофеина в крови сейчас, прогноз на сутки и время, когда кофе перестанет мешать сну.', tags: ['Модель выведения', 'SVG-графики'], ...own('caffeine') },
+      { icon: '🌱', color: '#34d399', title: 'Без привычки', tagline: 'Трекер отказа', desc: 'Таймер без сигарет или сладкого, сэкономленные деньги, этапы восстановления и рекорды.', tags: ['Мотивация', 'Таймер'], ...own('quit-habit') },
+      { icon: '🪴', color: '#4d7c3a', title: 'Мои растения', tagline: 'График полива', desc: 'Своё расписание для каждого растения. Цветы грустят и вянут, если про них забыть.', tags: ['Напоминания', 'Анимации'], ...own('plant-care') },
+      { icon: '🌍', color: '#2dd4bf', title: 'Страны мира', tagline: 'Скретч-карта путешествий', desc: 'Отмечайте, где побывали и куда мечтаете. Процент мира, континенты и достижения.', tags: ['Intl API', 'Достижения'], ...own('world-map') },
       { icon: '💸', color: '#6366f1', title: 'Финтрек', tagline: 'Личные финансы', desc: 'Доходы и расходы, графики по категориям, экспорт в CSV, работа офлайн.', tags: ['Chart.js', 'PWA'], ...own('finance-tracker') },
-      { icon: '✅', color: '#22c55e', title: 'Привычки', tagline: 'Трекер привычек', desc: 'Отмечай привычки каждый день, следи за сериями и тепловой картой за год.', tags: ['JavaScript', 'localStorage'], ...own('habit-tracker') },
+      { icon: '✅', color: '#22c55e', title: 'Привычки', tagline: 'Трекер привычек', desc: 'Отмечай привычки каждый день, следи за сериями и тепловой картой за полгода.', tags: ['JavaScript', 'localStorage'], ...own('habit-tracker') },
       { icon: '🏋️', color: '#f97316', title: 'Тренировки', tagline: 'Журнал тренировок', desc: 'Упражнения, подходы и веса, личные рекорды и график прогресса.', tags: ['JavaScript', 'SVG-графики'], ...own('workout-log') },
       { icon: '🍅', color: '#ef4444', title: 'Фокус', tagline: 'Помодоро-таймер', desc: 'Работа по помидорам, учёт времени по проектам и статистика за неделю.', tags: ['JavaScript', 'Notifications'], ...own('focus-timer') },
       { icon: '🌈', color: '#eab308', title: 'Настроение', tagline: 'Дневник настроения', desc: 'Отмечай настроение и что на него повлияло. Календарь и закономерности.', tags: ['JavaScript', 'Аналитика'], ...own('mood-diary') },
@@ -57,11 +66,36 @@ export const sections = [
     title: 'Полезные приложения',
     lead: 'Небольшие сервисы, которые решают одну задачу — быстро и красиво.',
     items: [
+      { icon: '📄', color: '#2563eb', title: 'Резюме', tagline: 'Конструктор резюме', desc: 'Заполняйте поля и смотрите результат вживую. Три шаблона, свой цвет, сохранение в PDF.', tags: ['Live-превью', 'Печать в PDF'], ...own('resume-builder') },
+      { icon: '🎨', color: '#feca57', title: 'Палитра из фото', tagline: 'Цвета с картинки', desc: 'Загрузите фото — алгоритм k-means найдёт главные цвета. Пипетка, контраст и экспорт в CSS.', tags: ['Canvas', 'k-means'], ...own('photo-palette') },
+      { icon: '🔏', color: '#22e584', title: 'Секретная записка', tagline: 'Шифрование AES-256', desc: 'Зашифруйте сообщение паролем прямо в браузере и отправьте ссылку. Сервер ничего не видит.', tags: ['Web Crypto', 'Безопасность'], ...own('secret-note') },
+      { icon: '🎧', color: '#8b9cff', title: 'Звуки фокуса', tagline: 'Генеративный эмбиент', desc: 'Микшер дождя, костра, моря и кафе. Все звуки генерируются кодом — без аудиофайлов.', tags: ['Web Audio', 'Синтез'], ...own('focus-sounds') },
+      { icon: '🛒', color: '#ffc933', title: 'Что выгоднее', tagline: 'Сравнение цен', desc: 'Цена за килограмм, литр или штуку прямо в магазине. Учитывает мультипаки и скидки.', tags: ['Калькулятор', 'UX'], ...own('price-compare') },
       { icon: '⛅', color: '#3b82f6', title: 'Небо', tagline: 'Погода', desc: 'Поиск городов, геолокация, прогноз по часам и на неделю, живой фон под погоду.', tags: ['REST API', 'Fetch'], ...own('weather-app') },
-      { icon: '🎬', color: '#e11d48', title: 'Что посмотреть', tagline: 'Выбор фильма', desc: 'Новинки и популярное обновляются сами каждую ночь: постеры, описания, поиск по всей базе, рулетка и список «посмотреть позже».', tags: ['Serverless', 'SPARQL'], ...own('movie-picker') },
-      { icon: '💱', color: '#14b8a6', title: 'Курс', tagline: 'Конвертер валют', desc: 'Актуальные курсы 30+ валют, быстрый обмен направления и избранные пары.', tags: ['REST API', 'Intl'], ...own('currency-converter') },
+      { icon: '🎬', color: '#e11d48', title: 'Что посмотреть', tagline: 'Выбор фильма', desc: 'Новинки и популярное обновляются сами каждую ночь: постеры, описания, поиск, рулетка.', tags: ['Serverless', 'SPARQL'], ...own('movie-picker') },
+      { icon: '💱', color: '#14b8a6', title: 'Курс', tagline: 'Конвертер валют', desc: 'Актуальные курсы 30+ валют, быстрый обмен направления и избранные валюты.', tags: ['REST API', 'Intl'], ...own('currency-converter') },
       { icon: '🔐', color: '#8b5cf6', title: 'Пароль', tagline: 'Генератор паролей', desc: 'Надёжные пароли и фразы, оценка стойкости и время на взлом.', tags: ['Web Crypto', 'Безопасность'], ...own('password-generator') },
       { icon: '🔳', color: '#64748b', title: 'QR', tagline: 'Генератор QR-кодов', desc: 'QR для ссылки, Wi-Fi или контакта. Свои цвета и скачивание PNG.', tags: ['Canvas', 'JavaScript'], ...own('qr-generator') },
+    ],
+  },
+  {
+    id: 'demos',
+    title: 'Демо-сайты для бизнеса',
+    lead: 'Готовые сайты для популярных ниш — с калькуляторами, корзиной и записью. Выберите свою нишу, и я сделаю такой же под ваш бренд.',
+    all: { href: '/demo-sites/', label: 'Все демо с превью на ПК и телефоне' },
+    items: [
+      { icon: '💈', color: '#c8a46a', title: 'BLADE', tagline: 'Барбершоп', desc: 'Прайс, мастера и онлайн-запись в тёмном стиле с латунью.', tags: ['Запись'], live: '/demo-sites/sites/barber.html' },
+      { icon: '🦷', color: '#0fa3a3', title: 'Улыбка+', tagline: 'Стоматология', desc: 'Цены по вкладкам, врачи, рассрочка и запись на приём.', tags: ['Вкладки цен'], live: '/demo-sites/sites/dental.html' },
+      { icon: '🏋️', color: '#c6ff3d', title: 'PULSE', tagline: 'Фитнес-клуб', desc: 'Расписание с записью на занятия, абонементы и тренеры.', tags: ['Расписание'], live: '/demo-sites/sites/fitness.html' },
+      { icon: '💅', color: '#c97b6d', title: 'Lumière', tagline: 'Салон красоты', desc: 'Прайс-аккордеон, галерея работ и запись к мастеру.', tags: ['Галерея'], live: '/demo-sites/sites/beauty.html' },
+      { icon: '🌿', color: '#7d9a84', title: 'Психолог', tagline: 'Частная практика', desc: 'Спокойный дизайн и выбор свободного времени для сессии.', tags: ['Слоты времени'], live: '/demo-sites/sites/psychologist.html' },
+      { icon: '🔧', color: '#ffc400', title: 'Мотор', tagline: 'Автосервис', desc: 'Калькулятор стоимости ремонта, услуги и гарантия.', tags: ['Калькулятор'], live: '/demo-sites/sites/auto.html' },
+      { icon: '⚖️', color: '#b8955a', title: 'Право и Ко', tagline: 'Юристы', desc: 'Практики с ценами, кейсы и бесплатная консультация.', tags: ['Кейсы'], live: '/demo-sites/sites/law.html' },
+      { icon: '🏢', color: '#2f5bff', title: 'Квартал', tagline: 'Недвижимость', desc: 'Каталог квартир с фильтрами и ипотечный калькулятор.', tags: ['Ипотека'], live: '/demo-sites/sites/realty.html' },
+      { icon: '🏡', color: '#b5763c', title: 'Каркас', tagline: 'Строительство домов', desc: 'Каталог проектов и калькулятор стоимости дома.', tags: ['Калькулятор'], live: '/demo-sites/sites/build.html' },
+      { icon: '🍣', color: '#e63946', title: 'Сакура Экспресс', tagline: 'Доставка еды', desc: 'Меню по категориям, рабочая корзина и расчёт доставки.', tags: ['Корзина'], live: '/demo-sites/sites/sushi.html' },
+      { icon: '🇬🇧', color: '#6c4cf5', title: 'Speakly', tagline: 'Онлайн-школа', desc: 'Интерактивный тест уровня, тарифы и пробный урок.', tags: ['Тест'], live: '/demo-sites/sites/english.html' },
+      { icon: '🌴', color: '#ff8a3d', title: 'Горизонт', tagline: 'Турагентство', desc: 'Туры с фильтрами и горящее предложение с таймером.', tags: ['Таймер'], live: '/demo-sites/sites/travel.html' },
     ],
   },
 ];
