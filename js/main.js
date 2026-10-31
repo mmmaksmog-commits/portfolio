@@ -1,4 +1,4 @@
-import { profile, stats, skills, sections, designs } from './config.js';
+import { profile, stats, skills, sections, designs } from './config.js?v=3';
 
 const $ = (s) => document.querySelector(s);
 const waUrl = (text = '') => `https://wa.me/${profile.whatsapp}${text ? `?text=${encodeURIComponent(text)}` : ''}`;
