@@ -1,3 +1,4 @@
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 /* Ночная фиолетовая гамма — под фото с подсветкой салона. */
 :root {
   --bg: #0a0612;
