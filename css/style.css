@@ -392,3 +392,13 @@ body.menu-open .nav__burger span:last-child { transform: translateY(-4px) rotate
 .zapret__svc { display: flex; justify-content: space-between; padding: 9px 12px; margin-top: 6px; border-radius: 10px; background: #1c1f26; color: #e9ecf1; }
 .zapret__svc b { color: var(--z); font-weight: 600; }
 @media (prefers-reduced-motion: reduce) { .zapret__power { animation: none; } }
+.zapret__more { margin: clamp(28px, 4vw, 40px) 0 16px; font-size: clamp(20px, 3vw, 26px); }
+.zapret__progs { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
+.zprog { display: flex; flex-direction: column; min-width: 0; padding: 22px; border: 1px solid rgba(47, 179, 110, 0.25); border-radius: 22px; background: linear-gradient(180deg, rgba(47, 179, 110, 0.08), transparent 60%), #10161a; transition: border-color 0.2s, transform 0.2s; }
+.zprog:hover { border-color: rgba(47, 179, 110, 0.6); transform: translateY(-3px); }
+.zprog__ico { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 13px; background: var(--z-soft); color: var(--z); font-size: 20px; font-weight: 700; }
+.zprog h3 { margin: 14px 0 8px; font-size: 19px; }
+.zprog h3 small { color: var(--z); font-size: 13px; font-weight: 600; }
+.zprog p { flex: 1; margin: 0 0 18px; color: var(--muted); font-size: 14.5px; line-height: 1.5; }
+.zprog__btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 16px; border-radius: 12px; border: 1px solid var(--z); color: #8fe3b6; font-weight: 700; font-size: 14.5px; text-decoration: none; transition: background 0.15s, color 0.15s; }
+.zprog__btn:hover { background: var(--z); color: var(--z-ink); }

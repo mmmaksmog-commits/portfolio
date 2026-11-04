@@ -78,6 +78,13 @@
 
 - 🛡️ [Zapret GUI by mysik](https://mysik-zapret.netlify.app) — программа для Windows 10 и 11: Discord, YouTube и Steam одной кнопкой, без VPN. Автоподбор стратегии, проверка доступа, трей и автозапуск.
 
+
+Другие программы для Windows (описание и скачивание — на [сайте](https://mysik-zapret.netlify.app/#apps)):
+- **Video Loader** — скачивание видео и музыки с YouTube, VK Видео, RuTube, TikTok
+- **Converter** — конвертер видео, музыки и картинок
+- **Win Cleaner** — очистка, настройка и автозагрузка Windows
+- **DNS Switch** — смена DNS в один клик
+
 ## Особенности
 
 - Без фреймворков: HTML, CSS и JavaScript-модули
