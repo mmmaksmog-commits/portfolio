@@ -74,6 +74,10 @@
 - 🇬🇧 [Speakly](https://mysik-portfolio.vercel.app/demo-sites/sites/english.html) — Интерактивный тест уровня, тарифы и пробный урок.
 - 🌴 [Горизонт](https://mysik-portfolio.vercel.app/demo-sites/sites/travel.html) — Туры с фильтрами и горящее предложение с таймером.
 
+## Свой продукт
+
+- 🛡️ [Zapret GUI by mysik](https://mysik-zapret.netlify.app) — программа для Windows 10 и 11: Discord, YouTube и Steam одной кнопкой, без VPN. Автоподбор стратегии, проверка доступа, трей и автозапуск.
+
 ## Особенности
 
 - Без фреймворков: HTML, CSS и JavaScript-модули

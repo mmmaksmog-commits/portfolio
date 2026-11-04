@@ -362,3 +362,33 @@ body.menu-open .nav__burger span:last-child { transform: translateY(-4px) rotate
   .fold .cards .card { grid-column: auto; }
   .fold .card__cover { height: 120px; }
 }
+
+/* Zapret GUI — свой продукт, отдельная зелёная тема */
+.zapret { --z: #2fb36e; --z-ink: #06150d; --z-soft: rgba(47, 179, 110, 0.14); }
+.zapret__card { position: relative; display: grid; gap: clamp(24px, 4vw, 48px); align-items: center; overflow: hidden; padding: clamp(22px, 4vw, 48px); border: 1px solid rgba(47, 179, 110, 0.35); border-radius: 30px; background: radial-gradient(120% 90% at 100% 0%, rgba(47, 179, 110, 0.22), transparent 60%), #10161a; }
+@media (min-width: 900px) { .zapret__card { grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); } }
+.zapret__tag { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; background: var(--z-soft); color: #8fe3b6; font-size: 13px; font-weight: 600; }
+.zapret__tag i { width: 7px; height: 7px; border-radius: 50%; background: var(--z); box-shadow: 0 0 0 4px rgba(47, 179, 110, 0.2); }
+.zapret__title { margin: 16px 0 12px; font-size: clamp(30px, 5vw, 48px); line-height: 1.05; }
+.zapret__title span { color: var(--z); }
+.zapret__lead { margin: 0 0 18px; color: var(--muted); max-width: 36em; }
+.zapret__list { display: grid; gap: 10px; margin: 0 0 26px; padding: 0; list-style: none; }
+.zapret__list li { position: relative; padding-left: 28px; color: var(--muted); font-size: 15px; }
+.zapret__list li::before { content: '✓'; position: absolute; left: 0; top: 1px; display: grid; place-items: center; width: 19px; height: 19px; border-radius: 6px; background: var(--z-soft); color: var(--z); font-size: 12px; font-weight: 800; }
+.zapret__list b { color: var(--text, #fff); }
+.zapret__btn { display: inline-flex; align-items: center; gap: 10px; padding: 16px 24px; border-radius: 14px; background: var(--z); color: var(--z-ink); font-weight: 700; text-decoration: none; box-shadow: 0 12px 30px -12px rgba(47, 179, 110, 0.8); transition: transform 0.15s, filter 0.15s; }
+.zapret__btn:hover { transform: translateY(-2px); filter: brightness(1.08); }
+.zapret__app { justify-self: center; width: 100%; max-width: 300px; padding: 0 16px 18px; border: 1px solid #262a33; border-radius: 20px; background: #14161b; box-shadow: 0 30px 70px -24px rgba(0, 0, 0, 0.8); font-size: 13px; }
+.zapret__bar { display: flex; justify-content: space-between; align-items: center; height: 42px; color: #6b7282; }
+.zapret__bar span { display: flex; align-items: center; gap: 8px; color: #e9ecf1; font-weight: 600; }
+.zapret__bar i { width: 15px; height: 15px; border-radius: 5px; background: var(--z); }
+.zapret__tabs { display: grid; grid-template-columns: repeat(3, 1fr); padding: 3px; border-radius: 11px; background: #1c1f26; }
+.zapret__tabs span { padding: 6px 0; border-radius: 8px; text-align: center; color: #949bab; font-size: 12px; }
+.zapret__tabs .on { background: #2a2e38; color: #f2f4f7; }
+.zapret__power { display: grid; place-items: center; width: 120px; height: 120px; margin: 24px auto 8px; border-radius: 50%; background: radial-gradient(circle, rgba(47, 179, 110, 0.25), transparent 70%); border: 2px solid var(--z); box-shadow: 0 0 40px -6px rgba(47, 179, 110, 0.7); animation: zpulse 2.6s ease-in-out infinite; }
+.zapret__power svg { width: 44px; height: 44px; fill: none; stroke: var(--z); stroke-width: 2.4; stroke-linecap: round; }
+@keyframes zpulse { 50% { box-shadow: 0 0 60px 0 rgba(47, 179, 110, 0.55); } }
+.zapret__status { margin: 0 0 14px; text-align: center; color: var(--z); font-weight: 700; }
+.zapret__svc { display: flex; justify-content: space-between; padding: 9px 12px; margin-top: 6px; border-radius: 10px; background: #1c1f26; color: #e9ecf1; }
+.zapret__svc b { color: var(--z); font-weight: 600; }
+@media (prefers-reduced-motion: reduce) { .zapret__power { animation: none; } }
