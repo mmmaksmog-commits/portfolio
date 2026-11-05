@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Визитка by mysik</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&display=swap">
+<style>
+  /* Редактор: слева форма, справа живой предпросмотр сайта. */
+  :root {
+    --bg: #14161b; --panel: #1c1f26; --panel2: #262a33; --line: #2c323e; --fg: #e9ecf1; --muted: #949bab; --faint: #6b7282;
+    --accent: #2fb36e; --red: #f0525f;
+    --f: "Onest", "Segoe UI", system-ui, sans-serif;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body { background: var(--bg); color: var(--fg); font: 14px/1.45 var(--f); }
+  .app { display: grid; grid-template-columns: 420px minmax(0, 1fr); height: 100%; }
+  aside { border-right: 1px solid var(--line); overflow-y: auto; padding: 18px 18px 40px; }
+  .brand { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
+  .brand i { width: 28px; height: 28px; border-radius: 8px; background: var(--accent); display: grid; place-items: center; font-style: normal; font-weight: 700; color: #fff; }
+  .brand b { font-size: 16px; } .brand span { color: var(--faint); }
+  details { background: var(--panel); border-radius: 14px; margin-bottom: 10px; }
+  summary { cursor: pointer; list-style: none; padding: 14px 16px; font-weight: 600; display: flex; justify-content: space-between; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; color: var(--faint); } details[open] summary::after { content: "–"; }
+  .body { padding: 0 16px 16px; display: grid; gap: 12px; }
+  label { display: grid; gap: 5px; color: var(--muted); font-size: 12.5px; }
+  input, textarea, select { width: 100%; background: var(--bg); color: var(--fg); border: 1.5px solid var(--line); border-radius: 10px; padding: 9px 11px; font: 14px var(--f); }
+  input:focus, textarea:focus, select:focus { outline: none; border-color: var(--accent); }
+  textarea { min-height: 76px; resize: vertical; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .list { display: grid; gap: 8px; }
+  .item { display: grid; grid-template-columns: minmax(0, 1fr) 90px 72px 30px; gap: 6px; align-items: center; }
+  .item.review { grid-template-columns: minmax(0, 1fr) 30px; align-items: start; }
+  .item.review > div { display: grid; gap: 6px; }
+  .x { appearance: none; border: 0; background: var(--panel2); color: var(--muted); width: 30px; height: 34px; border-radius: 8px; cursor: pointer; font-size: 15px; }
+  .x:hover { color: var(--red); }
+  .add { appearance: none; border: 1.5px dashed var(--line); background: none; color: var(--muted); border-radius: 10px; padding: 9px; cursor: pointer; font: 500 13.5px var(--f); }
+  .add:hover { color: var(--fg); border-color: var(--faint); }
+  .hint { color: var(--faint); font-size: 12px; margin: 0; }
+  .themes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .theme { appearance: none; border: 2px solid transparent; border-radius: 12px; padding: 0; cursor: pointer; overflow: hidden; background: none; text-align: left; }
+  .theme.on { border-color: var(--accent); }
+  .theme .sw { height: 46px; display: flex; align-items: flex-end; padding: 6px; gap: 4px; }
+  .theme .sw b { width: 14px; height: 14px; border-radius: 50%; }
+  .theme span { display: block; padding: 5px 7px; font-size: 11.5px; color: var(--muted); background: var(--panel2); }
+  .photos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .ph { position: relative; aspect-ratio: 1; border-radius: 10px; background: var(--panel2) center/cover; }
+  .ph .x { position: absolute; top: 4px; right: 4px; width: 24px; height: 24px; font-size: 12px; background: rgba(0,0,0,.6); color: #fff; }
+  .ph.main::after { content: "главное"; position: absolute; left: 4px; bottom: 4px; font-size: 10.5px; background: var(--accent); color: #fff; padding: 1px 6px; border-radius: 6px; }
+  .drop { aspect-ratio: 1; border: 1.5px dashed var(--line); border-radius: 10px; display: grid; place-items: center; color: var(--muted); cursor: pointer; text-align: center; font-size: 12px; padding: 6px; }
+  .check { display: flex; align-items: center; gap: 8px; color: var(--fg); font-size: 13.5px; }
+  .check input { width: auto; }
+
+  main { display: grid; grid-template-rows: auto minmax(0, 1fr); min-width: 0; }
+  .bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; padding: 12px 18px; border-bottom: 1px solid var(--line); }
+  .seg { display: flex; background: var(--panel); border-radius: 10px; padding: 3px; }
+  .seg button { appearance: none; border: 0; background: none; color: var(--muted); padding: 7px 12px; border-radius: 8px; cursor: pointer; font: 500 13px var(--f); }
+  .seg button.on { background: var(--panel2); color: var(--fg); }
+  .grow { flex: 1; }
+  .btn { appearance: none; border: 0; border-radius: 11px; padding: 10px 16px; cursor: pointer; font: 600 14px var(--f); color: #fff; background: var(--accent); }
+  .btn.ghost { background: var(--panel); color: var(--fg); }
+  .stage { display: grid; place-items: start center; overflow: auto; padding: 22px; background: #0f1115; }
+  iframe { border: 0; background: #fff; border-radius: 14px; box-shadow: 0 20px 60px rgba(0,0,0,.5); width: 100%; height: 100%; min-height: 600px; transition: width .25s ease; }
+  .stage.phone iframe { width: 390px; height: 780px; border-radius: 30px; border: 10px solid #22252c; }
+  .toast { position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); background: #2a2e38; padding: 10px 16px; border-radius: 12px; opacity: 0; transition: opacity .2s; pointer-events: none; }
+  .toast.show { opacity: 1; }
+  @media (max-width: 900px) {
+    .app { grid-template-columns: 1fr; height: auto; }
+    aside { border-right: 0; }
+    .stage { min-height: 80vh; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside>
+    <div class="brand"><i>В</i><b>Визитка</b><span>by mysik</span></div>
+
+    <details open>
+      <summary>Главное</summary>
+      <div class="body">
+        <label>Имя или название<input id="name"></label>
+        <label>Кто вы — одной строкой<input id="role" placeholder="Мастер маникюра и педикюра"></label>
+        <label>Коротко, почему к вам<textarea id="pitch"></textarea></label>
+        <div class="two">
+          <label>Город<input id="city"></label>
+          <label>Опыт<input id="exp" placeholder="7 лет"></label>
+        </div>
+      </div>
+    </details>
+
+    <details open>
+      <summary>Запись и контакты</summary>
+      <div class="body">
+        <label>Ссылка на бота записи или страницу записи<input id="book" placeholder="https://t.me/имя_bot"></label>
+        <p class="hint">Кнопка «Записаться» поведёт сюда. Если пусто — откроется Telegram или звонок.</p>
+        <div class="two">
+          <label>Телефон<input id="phone" placeholder="+7 900 000-00-00"></label>
+          <label>Telegram<input id="tg" placeholder="@username"></label>
+        </div>
+        <div class="two">
+          <label>WhatsApp (номер)<input id="wa" placeholder="+7 900 000-00-00"></label>
+          <label>ВКонтакте<input id="vk" placeholder="vk.com/…"></label>
+        </div>
+        <label>Адрес<input id="address" placeholder="ул. Ленина, 1, 2 этаж"></label>
+        <label>Ссылка на карту<input id="map" placeholder="Скопируйте из Яндекс Карт или 2ГИС"></label>
+        <label>График<input id="hours" placeholder="Пн–Сб 10:00–20:00"></label>
+      </div>
+    </details>
+
+    <details open>
+      <summary>Услуги и цены</summary>
+      <div class="body">
+        <div class="list" id="services"></div>
+        <button class="add" id="addService">+ Добавить услугу</button>
+      </div>
+    </details>
+
+    <details>
+      <summary>Фото работ</summary>
+      <div class="body">
+        <div class="photos" id="photos"></div>
+        <p class="hint">Первое фото — главное, оно встанет наверх. Фото сжимаются и встраиваются прямо в сайт.</p>
+        <input type="file" id="photoInput" accept="image/*" multiple hidden>
+      </div>
+    </details>
+
+    <details>
+      <summary>О себе и отзывы</summary>
+      <div class="body">
+        <label>О себе<textarea id="about"></textarea></label>
+        <div class="list" id="reviews"></div>
+        <button class="add" id="addReview">+ Добавить отзыв</button>
+        <p class="hint">Добавляйте настоящие отзывы клиентов — с их разрешения.</p>
+      </div>
+    </details>
+
+    <details open>
+      <summary>Оформление</summary>
+      <div class="body">
+        <div class="themes" id="themes"></div>
+        <label class="check"><input type="checkbox" id="credit"> Подпись «Сайт сделан в Визитке by mysik»</label>
+      </div>
+    </details>
+
+    <details>
+      <summary>Проект</summary>
+      <div class="body">
+        <p class="hint">Всё сохраняется в этом браузере автоматически. Чтобы перенести на другой компьютер или сделать сайт следующему клиенту — сохраните проект в файл.</p>
+        <div class="two">
+          <button class="btn ghost" id="saveProject">Сохранить проект</button>
+          <button class="btn ghost" id="loadProject">Открыть проект</button>
+        </div>
+        <button class="add" id="newProject">Начать новый сайт</button>
+        <input type="file" id="projectInput" accept=".json,application/json" hidden>
+      </div>
+    </details>
+  </aside>
+
+  <main>
+    <div class="bar">
+      <div class="seg"><button id="vPhone" class="on">Телефон</button><button id="vDesk">Компьютер</button></div>
+      <span class="grow"></span>
+      <button class="btn" id="download">Скачать сайт</button>
+    </div>
+    <div class="stage phone" id="stage"><iframe id="frame" title="Предпросмотр сайта"></iframe></div>
+  </main>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const THEMES = {
+  pudra:   { name: "Пудра",   bg: "#fbf6f3", surface: "#ffffff", text: "#2b2222", muted: "#8a7a76", accent: "#c4776f", accentText: "#ffffff", soft: "#f3e5df", display: "Cormorant Garamond", dw: "600", body: "Manrope" },
+  grafit:  { name: "Графит",  bg: "#141414", surface: "#1e1e1e", text: "#f2efe9", muted: "#a39f97", accent: "#d6b26e", accentText: "#141414", soft: "#262420", display: "Playfair Display", dw: "600", body: "Manrope" },
+  lavanda: { name: "Лаванда", bg: "#f6f4fb", surface: "#ffffff", text: "#24203a", muted: "#7c7695", accent: "#7b61c9", accentText: "#ffffff", soft: "#ebe6f8", display: "Unbounded", dw: "500", body: "Onest" },
+  myata:   { name: "Мята",    bg: "#f2f7f4", surface: "#ffffff", text: "#1c2a24", muted: "#6c8178", accent: "#2f8f6a", accentText: "#ffffff", soft: "#e0efe8", display: "Prata", dw: "400", body: "Onest" },
+};
+
+const EXAMPLE = {
+  name: "Анна — ногтевая студия", role: "Маникюр, педикюр и наращивание", city: "Ставрополь", exp: "7 лет",
+  pitch: "Аккуратное покрытие, которое держится 3–4 недели. Стерильные инструменты, одноразовые пилки, уютный кабинет в центре.",
+  book: "", phone: "+7 900 000-00-00", tg: "@username", wa: "", vk: "", address: "ул. Мира, 1, 2 этаж", map: "", hours: "Пн–Сб 10:00–20:00",
+  about: "Работаю с 2018 года, регулярно прохожу курсы повышения квалификации. Подберу форму и цвет под ваш стиль и расскажу, как сохранить маникюр подольше.",
+  services: [
+    { n: "Маникюр с покрытием", p: "1 800", d: "1 ч 30 мин" },
+    { n: "Маникюр без покрытия", p: "900", d: "45 мин" },
+    { n: "Педикюр с покрытием", p: "2 300", d: "1 ч 45 мин" },
+    { n: "Наращивание", p: "от 3 000", d: "2 ч 30 мин" },
+  ],
+  reviews: [], photos: [], theme: "pudra", credit: true, example: true,
+};
+
+const $ = (id) => document.getElementById(id);
+const FIELDS = ["name", "role", "pitch", "city", "exp", "book", "phone", "tg", "wa", "vk", "address", "map", "hours", "about"];
+let S = load() || JSON.parse(JSON.stringify(EXAMPLE));
+
+function load() { try { const s = localStorage.getItem("vizitka-mysik"); return s ? JSON.parse(s) : null; } catch (e) { return null; } }
+function save() { try { localStorage.setItem("vizitka-mysik", JSON.stringify(S)); } catch (e) { toast("Слишком много фото для автосохранения — сохраните проект в файл"); } }
+function toast(t) { const el = $("toast"); el.textContent = t; el.classList.add("show"); clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove("show"), 2600); }
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+// ---------- форма
+function fillForm() {
+  FIELDS.forEach((f) => { $(f).value = S[f] || ""; });
+  $("credit").checked = S.credit !== false;
+  renderServices(); renderReviews(); renderPhotos(); renderThemes();
+}
+FIELDS.forEach((f) => $(f).addEventListener("input", () => { S[f] = $(f).value; S.example = false; changed(); }));
+$("credit").addEventListener("change", () => { S.credit = $("credit").checked; changed(); });
+
+function renderServices() {
+  $("services").innerHTML = "";
+  S.services.forEach((s, i) => {
+    const row = document.createElement("div");
+    row.className = "item";
+    row.innerHTML = `<input placeholder="Услуга" value="${esc(s.n)}"><input placeholder="Цена, ₽" value="${esc(s.p)}"><input placeholder="Время" value="${esc(s.d)}"><button class="x" title="Удалить">×</button>`;
+    const [n, p, d] = row.querySelectorAll("input");
+    n.oninput = () => { s.n = n.value; changed(); };
+    p.oninput = () => { s.p = p.value; changed(); };
+    d.oninput = () => { s.d = d.value; changed(); };
+    row.querySelector(".x").onclick = () => { S.services.splice(i, 1); renderServices(); changed(); };
+    $("services").appendChild(row);
+  });
+}
+$("addService").onclick = () => { S.services.push({ n: "", p: "", d: "" }); renderServices(); $("services").lastChild.querySelector("input").focus(); };
+
+function renderReviews() {
+  $("reviews").innerHTML = "";
+  S.reviews.forEach((r, i) => {
+    const row = document.createElement("div");
+    row.className = "item review";
+    row.innerHTML = `<div><input placeholder="Имя клиента" value="${esc(r.a)}"><textarea placeholder="Текст отзыва">${esc(r.t)}</textarea></div><button class="x" title="Удалить">×</button>`;
+    const a = row.querySelector("input"), t = row.querySelector("textarea");
+    a.oninput = () => { r.a = a.value; changed(); };
+    t.oninput = () => { r.t = t.value; changed(); };
+    row.querySelector(".x").onclick = () => { S.reviews.splice(i, 1); renderReviews(); changed(); };
+    $("reviews").appendChild(row);
+  });
+}
+$("addReview").onclick = () => { S.reviews.push({ a: "", t: "" }); renderReviews(); };
+
+function renderPhotos() {
+  const box = $("photos");
+  box.innerHTML = "";
+  S.photos.forEach((src, i) => {
+    const d = document.createElement("div");
+    d.className = "ph" + (i === 0 ? " main" : "");
+    d.style.backgroundImage = `url(${src})`;
+    d.title = i === 0 ? "Главное фото" : "Нажмите, чтобы сделать главным";
+    d.innerHTML = `<button class="x" title="Удалить">×</button>`;
+    d.onclick = (e) => { if (e.target.classList.contains("x")) return; S.photos.unshift(S.photos.splice(i, 1)[0]); renderPhotos(); changed(); };
+    d.querySelector(".x").onclick = () => { S.photos.splice(i, 1); renderPhotos(); changed(); };
+    box.appendChild(d);
+  });
+  if (S.photos.length < 12) {
+    const add = document.createElement("div");
+    add.className = "drop";
+    add.innerHTML = "+ Добавить<br>фото";
+    add.onclick = () => $("photoInput").click();
+    box.appendChild(add);
+  }
+}
+$("photoInput").onchange = async (e) => {
+  const files = [...e.target.files].slice(0, 12 - S.photos.length);
+  e.target.value = "";
+  for (const f of files) {
+    try { S.photos.push(await compress(f, 1400, 0.82)); } catch (err) { toast("Не получилось открыть " + f.name); }
+  }
+  renderPhotos(); changed();
+};
+function compress(file, max, q) {
+  return new Promise((res, rej) => {
+    const img = new Image();
+    img.onload = () => {
+      const k = Math.min(1, max / Math.max(img.width, img.height));
+      const c = document.createElement("canvas");
+      c.width = Math.round(img.width * k); c.height = Math.round(img.height * k);
+      c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+      URL.revokeObjectURL(img.src);
+      res(c.toDataURL("image/jpeg", q));
+    };
+    img.onerror = rej;
+    img.src = URL.createObjectURL(file);
+  });
+}
+
+function renderThemes() {
+  $("themes").innerHTML = "";
+  Object.entries(THEMES).forEach(([id, t]) => {
+    const b = document.createElement("button");
+    b.className = "theme" + (S.theme === id ? " on" : "");
+    b.innerHTML = `<div class="sw" style="background:${t.bg}"><b style="background:${t.accent}"></b><b style="background:${t.text}"></b></div><span>${t.name}</span>`;
+    b.onclick = () => { S.theme = id; renderThemes(); changed(); };
+    $("themes").appendChild(b);
+  });
+}
+
+// ---------- сборка сайта
+function digits(s) { return String(s || "").replace(/[^\d+]/g, ""); }
+function tgLink(s) { s = String(s || "").trim(); if (!s) return ""; if (/^https?:/.test(s)) return s; return "https://t.me/" + s.replace(/^@/, "").replace(/^t\.me\//, ""); }
+function vkLink(s) { s = String(s || "").trim(); if (!s) return ""; if (/^https?:/.test(s)) return s; return "https://" + s.replace(/^\/+/, ""); }
+function waLink(s) { const d = digits(s).replace("+", ""); return d ? "https://wa.me/" + (d.startsWith("8") && d.length === 11 ? "7" + d.slice(1) : d) : ""; }
+
+function buildSite(s, forExport) {
+  const t = THEMES[s.theme] || THEMES.pudra;
+  const services = s.services.filter((x) => x.n.trim());
+  const reviews = s.reviews.filter((r) => r.t.trim());
+  const photos = s.photos;
+  const book = s.book.trim() || tgLink(s.tg) || (s.phone ? "tel:" + digits(s.phone) : "");
+  const bookLabel = s.book.trim() ? "Записаться онлайн" : s.tg ? "Записаться в Telegram" : "Записаться по телефону";
+  const title = [s.name, s.role, s.city].filter(Boolean).join(" · ");
+  const desc = (s.pitch || s.about || s.role || "").slice(0, 160);
+  const WEIGHTS = { "Prata": "400", "Cormorant Garamond": "500;600;700", "Playfair Display": "500;600;700", "Unbounded": "400;500;600", "Manrope": "400;500;600;700", "Onest": "400;500;600;700" };
+  const fonts = [t.display, t.body].filter((v, i, a) => a.indexOf(v) === i).map((f) => "family=" + f.replace(/ /g, "+") + ":wght@" + (WEIGHTS[f] || "400;600")).join("&");
+  const contacts = [
+    s.phone && `<a class="c" href="tel:${esc(digits(s.phone))}"><span>Телефон</span><b>${esc(s.phone)}</b></a>`,
+    s.tg && `<a class="c" href="${esc(tgLink(s.tg))}" target="_blank" rel="noopener"><span>Telegram</span><b>${esc(s.tg.startsWith("@") || /^https?:/.test(s.tg) ? s.tg : "@" + s.tg)}</b></a>`,
+    s.wa && `<a class="c" href="${esc(waLink(s.wa))}" target="_blank" rel="noopener"><span>WhatsApp</span><b>${esc(s.wa)}</b></a>`,
+    s.vk && `<a class="c" href="${esc(vkLink(s.vk))}" target="_blank" rel="noopener"><span>ВКонтакте</span><b>${esc(s.vk.replace(/^https?:\/\//, ""))}</b></a>`,
+    s.address && `<${s.map ? `a href="${esc(s.map)}" target="_blank" rel="noopener"` : "div"} class="c"><span>Адрес${s.map ? " · открыть карту" : ""}</span><b>${esc([s.city, s.address].filter(Boolean).join(", "))}</b></${s.map ? "a" : "div"}>`,
+    s.hours && `<div class="c"><span>График</span><b>${esc(s.hours)}</b></div>`,
+  ].filter(Boolean).join("");
+  const ld = { "@context": "https://schema.org", "@type": "BeautySalon", name: s.name || undefined, description: desc || undefined,
+               telephone: s.phone || undefined, address: s.address ? { "@type": "PostalAddress", streetAddress: s.address, addressLocality: s.city || undefined } : undefined,
+               openingHours: s.hours || undefined };
+
+  return `<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${esc(title || "Сайт мастера")}</title>
+<meta name="description" content="${esc(desc)}">
+<meta property="og:title" content="${esc(s.name)}">
+<meta property="og:description" content="${esc(desc)}">
+<meta name="theme-color" content="${t.bg}">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?${fonts}&display=swap">
+<script type="application/ld+json">${JSON.stringify(ld).replace(/</g, "\\u003c")}<\/script>
+<style>
+:root{--bg:${t.bg};--surface:${t.surface};--text:${t.text};--muted:${t.muted};--accent:${t.accent};--on:${t.accentText};--soft:${t.soft};
+--fd:"${t.display}",Georgia,serif;--fb:"${t.body}","Segoe UI",system-ui,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 var(--fb);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}img{max-width:100%;display:block}
+.w{max-width:1080px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left));padding-right:max(20px,env(safe-area-inset-right))}
+header{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px)}
+header .w{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:14px}
+.logo{font:${t.dw} 20px/1.1 var(--fd);letter-spacing:.01em}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--accent);color:var(--on);border-radius:999px;padding:13px 24px;font-weight:600;font-size:15px;transition:transform .15s,filter .15s}
+.btn:hover{transform:translateY(-1px);filter:brightness(1.05)}.btn.sm{padding:9px 16px;font-size:14px}.btn.line{background:none;color:var(--text);box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--text) 25%,transparent)}
+.hero{padding-block:28px 64px}.hero .w{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.kicker{color:var(--accent);font-weight:600;font-size:14px;letter-spacing:.06em;text-transform:uppercase}
+h1{font:${t.dw} clamp(38px,6vw,68px)/1.02 var(--fd);margin:14px 0 18px;letter-spacing:-.01em;text-wrap:balance}
+.lead{color:var(--muted);font-size:18px;max-width:34em;margin:0 0 28px}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.facts{display:flex;flex-wrap:wrap;gap:28px;margin-top:34px;color:var(--muted);font-size:14px}.facts b{display:block;color:var(--text);font:${t.dw} 24px var(--fd)}
+.photo{aspect-ratio:4/5;border-radius:28px;background:var(--soft) center/cover;box-shadow:0 30px 60px -30px color-mix(in srgb,var(--text) 45%,transparent)}
+.photo.empty{display:grid;place-items:center;color:var(--muted);font-size:14px;background:linear-gradient(150deg,var(--soft),color-mix(in srgb,var(--accent) 22%,var(--soft)))}
+section{padding-block:56px}h2{font:${t.dw} clamp(30px,4vw,44px)/1.1 var(--fd);margin:0 0 26px;letter-spacing:-.005em}
+.price{background:var(--surface);border-radius:24px;padding:8px 28px}
+.row{display:flex;align-items:baseline;gap:14px;padding:18px 0;border-top:1px solid color-mix(in srgb,var(--text) 10%,transparent)}.row:first-child{border-top:0}
+.row .n{font-weight:600;font-size:17px}.row .d{color:var(--muted);font-size:14px}.row .dots{flex:1;border-bottom:1.5px dotted color-mix(in srgb,var(--text) 22%,transparent);transform:translateY(-5px)}
+.row .p{font:${t.dw} 22px var(--fd);white-space:nowrap}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.gallery div{aspect-ratio:1;border-radius:18px;background:var(--soft) center/cover}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}.about p{margin:0;color:var(--muted);font-size:17px;white-space:pre-line}
+.reviews{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.rv{background:var(--surface);border-radius:20px;padding:22px}.rv p{margin:0 0 12px;white-space:pre-line}.rv b{color:var(--muted);font-weight:500;font-size:14px}
+.contacts{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.c{display:block;background:var(--surface);border-radius:18px;padding:18px 20px;transition:transform .15s}a.c:hover{transform:translateY(-2px)}
+.c span{display:block;color:var(--muted);font-size:13px}.c b{font-weight:600;word-break:break-word}
+.final{text-align:center;background:var(--soft);border-radius:32px;padding:48px 24px;margin-top:56px}.final h2{margin-bottom:10px}.final p{color:var(--muted);margin:0 0 24px}
+footer{padding-block:34px;color:var(--muted);font-size:13px;text-align:center}
+@media(max-width:760px){.hero .w,.about{grid-template-columns:1fr;gap:28px}.hero{padding-top:8px}.photo{aspect-ratio:4/4.4;order:-1}
+.gallery{grid-template-columns:repeat(2,1fr)}.row{flex-wrap:wrap;gap:4px 12px}.row .dots{display:none}.row .p{margin-left:auto}.price{padding:4px 20px}header .btn{display:none}}
+</style>
+</head>
+<body>
+<header><div class="w"><a class="logo" href="#top">${esc(s.name || "Ваше имя")}</a>${book ? `<a class="btn sm" href="${esc(book)}" target="_blank" rel="noopener">Записаться</a>` : ""}</div></header>
+<main id="top">
+<div class="hero"><div class="w">
+  <div>
+    ${s.role ? `<div class="kicker">${esc(s.role)}</div>` : ""}
+    <h1>${esc(s.name || "Ваше имя")}</h1>
+    ${s.pitch ? `<p class="lead">${esc(s.pitch)}</p>` : ""}
+    <div class="cta">
+      ${book ? `<a class="btn" href="${esc(book)}" target="_blank" rel="noopener">${bookLabel}</a>` : ""}
+      ${services.length ? `<a class="btn line" href="#price">Цены</a>` : ""}
+    </div>
+    <div class="facts">
+      ${s.exp ? `<div><b>${esc(s.exp)}</b>опыта</div>` : ""}
+      ${services.length ? `<div><b>${services.length}</b>${services.length === 1 ? "услуга" : services.length < 5 ? "услуги" : "услуг"}</div>` : ""}
+      ${s.city ? `<div><b>${esc(s.city)}</b>${s.address ? esc(s.address) : "город"}</div>` : ""}
+    </div>
+  </div>
+  ${photos[0] ? `<div class="photo" style="background-image:url(${photos[0]})" role="img" aria-label="${esc(s.name)}"></div>` : `<div class="photo empty">${forExport ? "" : "Здесь будет главное фото"}</div>`}
+</div></div>
+
+${services.length ? `<section id="price"><div class="w"><h2>Услуги и цены</h2><div class="price">${services.map((x) =>
+  `<div class="row"><div><div class="n">${esc(x.n)}</div>${x.d ? `<div class="d">${esc(x.d)}</div>` : ""}</div><span class="dots"></span><div class="p">${esc(x.p)}${x.p && /\d$/.test(x.p.trim()) ? " ₽" : ""}</div></div>`).join("")}</div></div></section>` : ""}
+
+${photos.length > 1 ? `<section><div class="w"><h2>Работы</h2><div class="gallery">${photos.slice(1).map((p) => `<div style="background-image:url(${p})" role="img" aria-label="Работа"></div>`).join("")}</div></div></section>` : ""}
+
+${s.about ? `<section><div class="w about"><h2>Обо мне</h2><p>${esc(s.about)}</p></div></section>` : ""}
+
+${reviews.length ? `<section><div class="w"><h2>Отзывы</h2><div class="reviews">${reviews.map((r) => `<div class="rv"><p>${esc(r.t)}</p>${r.a ? `<b>— ${esc(r.a)}</b>` : ""}</div>`).join("")}</div></div></section>` : ""}
+
+${contacts ? `<section id="contacts"><div class="w"><h2>Контакты</h2><div class="contacts">${contacts}</div>
+${book ? `<div class="final"><h2>Запишитесь на удобное время</h2><p>${s.book.trim() ? "Онлайн-запись работает круглосуточно" : "Отвечу и подберу время"}</p><a class="btn" href="${esc(book)}" target="_blank" rel="noopener">${bookLabel}</a></div>` : ""}
+</div></section>` : ""}
+</main>
+<footer><div class="w">© ${new Date().getFullYear()} ${esc(s.name)}${s.credit !== false ? ` · Сайт сделан в «Визитке by mysik»` : ""}</div></footer>
+</body>
+</html>`;
+}
+
+// ---------- предпросмотр и экспорт
+let timer;
+function changed() { save(); clearTimeout(timer); timer = setTimeout(preview, 250); }
+function preview() {
+  const frame = $("frame");
+  const y = frame.contentWindow && frame.contentWindow.scrollY;
+  frame.srcdoc = buildSite(S, false);
+  frame.onload = () => { if (y) frame.contentWindow.scrollTo(0, y); };
+}
+$("vPhone").onclick = () => { $("stage").classList.add("phone"); $("vPhone").classList.add("on"); $("vDesk").classList.remove("on"); };
+$("vDesk").onclick = () => { $("stage").classList.remove("phone"); $("vDesk").classList.add("on"); $("vPhone").classList.remove("on"); };
+
+function download(name, text, type) {
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([text], { type }));
+  a.download = name;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+}
+$("download").onclick = () => {
+  if (!S.name.trim()) { toast("Впишите имя или название"); $("name").focus(); return; }
+  download("index.html", buildSite(S, true), "text/html");
+  toast("Готово! Загрузите index.html на хостинг — например, перетащите на app.netlify.com/drop");
+};
+$("saveProject").onclick = () => download((S.name || "сайт").replace(/[\\/:*?"<>|]/g, "") + ".vizitka.json", JSON.stringify(S), "application/json");
+$("loadProject").onclick = () => $("projectInput").click();
+$("projectInput").onchange = async (e) => {
+  const f = e.target.files[0]; e.target.value = "";
+  if (!f) return;
+  try { const d = JSON.parse(await f.text()); if (!d || !Array.isArray(d.services)) throw 0; S = Object.assign(JSON.parse(JSON.stringify(EXAMPLE)), d); fillForm(); changed(); toast("Проект открыт"); }
+  catch (err) { toast("Это не файл проекта Визитки"); }
+};
+$("newProject").onclick = () => {
+  S = { name: "", role: "", pitch: "", city: "", exp: "", book: "", phone: "", tg: "", wa: "", vk: "", address: "", map: "", hours: "", about: "",
+        services: [{ n: "", p: "", d: "" }], reviews: [], photos: [], theme: S.theme, credit: true };
+  fillForm(); changed(); $("name").focus();
+};
+
+fillForm();
+preview();
+</script>
+</body>
+</html>

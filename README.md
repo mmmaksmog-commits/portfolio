@@ -74,16 +74,17 @@
 - 🇬🇧 [Speakly](https://mysik-portfolio.vercel.app/demo-sites/sites/english.html) — Интерактивный тест уровня, тарифы и пробный урок.
 - 🌴 [Горизонт](https://mysik-portfolio.vercel.app/demo-sites/sites/travel.html) — Туры с фильтрами и горящее предложение с таймером.
 
-## Свой продукт
+## Программы by mysik
 
-- 🛡️ [Zapret GUI by mysik](https://mysik-zapret.netlify.app) — программа для Windows 10 и 11: Discord, YouTube и Steam одной кнопкой, без VPN. Автоподбор стратегии, проверка доступа, трей и автозапуск.
+Раздел «Программы» на главной и отдельная страница у каждой программы (`soft/<имя>.html`).
+Тексты правятся в `../soft-pages.py`, потом `python3 soft-pages.py` и `./deploy.sh site`.
 
-
-Другие программы для Windows (описание и скачивание — на [сайте](https://mysik-zapret.netlify.app/#apps)):
-- **Video Loader** — скачивание видео и музыки с YouTube, VK Видео, RuTube, TikTok
-- **Converter** — конвертер видео, музыки и картинок
-- **Win Cleaner** — очистка, настройка и автозагрузка Windows
-- **DNS Switch** — смена DNS в один клик
+- **Zapret GUI** — Discord, YouTube и Steam без VPN ([сайт](https://mysik-zapret.netlify.app))
+- **DNS Switch** — смена DNS в один клик · **Пинг** — следит за интернетом · **Передача** — файлы между ПК и телефоном по QR
+- **Video Loader** — видео и музыка с YouTube, VK, RuTube, TikTok · **Converter** — конвертер видео, музыки и фото · **Снимок** — скриншоты с редактором
+- **Win Cleaner** — очистка и настройка Windows · **Диск** — карта занятого места
+- **Раскладка** — исправляет «ghbdtn» → «привет» · **Буфер** — история буфера обмена
+- **Визитка** — конструктор сайтов для мастеров (работает в браузере: `soft/vizitka/`)
 
 ## Особенности
 
